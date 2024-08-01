@@ -55,6 +55,8 @@ class TkinterOBJ():
 
     def setup_header(self):
         # ヘッダーのWidgets
+        # 「PJ名」ラベル
+
         # 「新規作成」ボタン
         new_file_btn = ttk.Button(self.header_frame, text='新規作成')
         new_file_btn.grid(row=0, column=0)
