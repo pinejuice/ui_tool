@@ -55,17 +55,20 @@ class TkinterOBJ():
 
     def setup_header(self):
         # ヘッダーのWidgets
-        # 「PJ名」ラベル
-
+        # 「PJ名」フレーム
+        pj_name_label = Label(self.header_frame, text=f'PJ名: {self.project_info["name"]}')
+        pj_name_label.grid(row=0, column=0)
+        pj_name_frame = ttk.Frame(self.header_frame)
+        pj_name_frame.grid(row=0, column=1)
         # 「新規作成」ボタン
         new_file_btn = ttk.Button(self.header_frame, text='新規作成')
-        new_file_btn.grid(row=0, column=0)
+        new_file_btn.grid(row=0, column=2)
         # 「ファイルを選択」ボタン
         select_file_btn = ttk.Button(self.header_frame, text='ファイルを選択')
-        select_file_btn.grid(row=0, column=1)
+        select_file_btn.grid(row=0, column=3)
         # 「PJを選択」ボタン
         select_pj_btn = ttk.Button(self.header_frame, text='PJを選択')
-        select_pj_btn.grid(row=0, column=2)
+        select_pj_btn.grid(row=0, column=4)
         # ブラウザのドライバーの選択
         browser_select = ttk.Combobox(
             self.header_frame, 
