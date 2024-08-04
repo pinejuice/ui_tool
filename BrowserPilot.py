@@ -3,6 +3,7 @@ import sys
 import configparser
 from tkinter import *
 from tkinter import ttk
+from tkinter import font
 
 sys.dont_write_bytecode = True
 
@@ -26,9 +27,11 @@ class TkinterOBJ():
         # 画面タイトル変更
         self.root.title(APP_NAME)
         # 初期画面サイズ(widthxheight)
-        self.root.geometry("640x360")
+        self.root.geometry("1280x720")
         # 最小画面サイズ(width, height)
-        self.root.minsize(640, 360)
+        self.root.minsize(1280, 720)
+        # 画面最大化
+        self.root.state("zoomed")
 
     def load_current_project_info(self):
         conf = configparser.ConfigParser()
@@ -42,43 +45,74 @@ class TkinterOBJ():
         }
 
     def create_frame(self):
-        frame = Frame(self.root)
+        frame = Frame(self.root, background="#E8FFE6")
         frame.pack(expand=True, fill=BOTH)
 
         # ヘッダーの設定
-        self.header_frame = ttk.Frame(frame)
-        self.header_frame.pack(anchor=W)
+        self.header_frame1 = ttk.Frame(frame)
+        self.header_frame1.pack(fill='x', padx=[10, 10], pady=[10, 0])
+        self.header_frame2 = ttk.Frame(frame)
+        self.header_frame2.pack(fill='x', padx=[10, 10])
 
         # メインフレームの設定
         self.main_frame = ttk.Frame(frame)
-        self.main_frame.pack()
+        self.main_frame.pack(fill=BOTH, padx=[10, 10], pady=[0, 10])
 
     def setup_header(self):
-        # ヘッダーのWidgets
-        # 「PJ名」フレーム
-        pj_name_label = Label(self.header_frame, text=f'PJ名: {self.project_info["name"]}')
-        pj_name_label.grid(row=0, column=0)
-        pj_name_frame = ttk.Frame(self.header_frame)
-        pj_name_frame.grid(row=0, column=1)
-        # 「新規作成」ボタン
-        new_file_btn = ttk.Button(self.header_frame, text='新規作成')
-        new_file_btn.grid(row=0, column=2)
-        # 「ファイルを選択」ボタン
-        select_file_btn = ttk.Button(self.header_frame, text='ファイルを選択')
-        select_file_btn.grid(row=0, column=3)
+        # ヘッダー1のWidgets
+        # フォントの設定
+        font_bold = font.Font(size=10, weight='bold')
+        # 「PJ名」ラベル
+        pj_name_label_head = ttk.Label(
+            self.header_frame1, 
+            text=f'プロジェクト名', 
+            background='#0000aa', 
+            foreground='#ffffff', 
+            padding=(5, 10), 
+            relief='solid', 
+            font=font_bold
+        )
+        pj_name_label_head.pack(side='left')
+        pj_name_label_body = ttk.Label(
+            self.header_frame1, 
+            text=f'{self.project_info["name"]}', 
+            width=30, 
+            padding=(5, 10), 
+            relief='solid', 
+            font=font_bold
+        )
+        pj_name_label_body.pack(side='left', after=pj_name_label_head, padx=[0, 10])
+        # 「ファイル名」ラベル
+
         # 「PJを選択」ボタン
-        select_pj_btn = ttk.Button(self.header_frame, text='PJを選択')
-        select_pj_btn.grid(row=0, column=4)
+        select_pj_btn = ttk.Button(self.header_frame1, text='PJを選択')
+        select_pj_btn.pack(side='right')
+        # 「ファイルを選択」ボタン
+        select_file_btn = ttk.Button(self.header_frame1, text='ファイルを選択')
+        select_file_btn.pack(side='right')
+        # 「新規作成」ボタン
+        new_file_btn = ttk.Button(
+            self.header_frame1, 
+            text='新規作成', 
+            state=font_bold
+        )
+        new_file_btn.pack(side='right')
+        
+        # ヘッダー2のWidgets
+        # 実行ボタン
+        run_btn = ttk.Button(
+            self.header_frame2, 
+            text='実行', 
+            padding=[5, 5, 5, 5]
+        )
+        run_btn.pack(side='right', padx=[10, 0])
         # ブラウザのドライバーの選択
         browser_select = ttk.Combobox(
-            self.header_frame, 
+            self.header_frame2, 
             values=BROWSER_LIST,
             width=20
         )
-        browser_select.grid(row=1, column=0, columnspan=2)
-        # 実行ボタン
-        run_btn = ttk.Button(self.header_frame, text='実行', width=10)
-        run_btn.grid(row=1, column=2)
+        browser_select.pack(side='right')
 
     def setup_main_frame(self):
         # メインフレームのWidgets
