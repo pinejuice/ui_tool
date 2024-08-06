@@ -30,8 +30,8 @@ class TkinterOBJ():
         self.root.geometry("1280x720")
         # 最小画面サイズ(width, height)
         self.root.minsize(1280, 720)
-        # 画面最大化
-        self.root.state("zoomed")
+        # # 画面最大化
+        # self.root.state("zoomed")
 
     def load_current_project_info(self):
         conf = configparser.ConfigParser()
@@ -52,7 +52,7 @@ class TkinterOBJ():
         self.header_frame1 = ttk.Frame(frame)
         self.header_frame1.pack(fill='x', padx=[10, 10], pady=[10, 0])
         self.header_frame2 = ttk.Frame(frame)
-        self.header_frame2.pack(fill='x', padx=[10, 10])
+        self.header_frame2.pack(fill='x', padx=[10, 10], pady=[5, 5])
 
         # メインフレームの設定
         self.main_frame = ttk.Frame(frame)
@@ -76,13 +76,32 @@ class TkinterOBJ():
         pj_name_label_body = ttk.Label(
             self.header_frame1, 
             text=f'{self.project_info["name"]}', 
-            width=30, 
+            width=25, 
             padding=(5, 10), 
             relief='solid', 
             font=font_bold
         )
         pj_name_label_body.pack(side='left', after=pj_name_label_head, padx=[0, 10])
         # 「ファイル名」ラベル
+        file_name_label_head = ttk.Label(
+            self.header_frame1, 
+            text=f'ファイル名', 
+            background='#0000aa', 
+            foreground='#ffffff', 
+            padding=(5, 10), 
+            relief='solid', 
+            font=font_bold
+        )
+        file_name_label_head.pack(side='left')
+        file_name_label_body = ttk.Label(
+            self.header_frame1, 
+            text=f'{self.project_info["last_file"]}', 
+            width=40, 
+            padding=(5, 10), 
+            relief='solid', 
+            font=font_bold
+        )
+        file_name_label_body.pack(side='left', after=file_name_label_head, padx=[0, 10])
 
         # 「PJを選択」ボタン
         select_pj_btn = ttk.Button(self.header_frame1, text='PJを選択')
@@ -94,7 +113,8 @@ class TkinterOBJ():
         new_file_btn = ttk.Button(
             self.header_frame1, 
             text='新規作成', 
-            state=font_bold
+            state=font_bold, 
+            padding=[5, 10, 5, 10]
         )
         new_file_btn.pack(side='right')
         
