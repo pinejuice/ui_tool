@@ -1,2 +1,2 @@
-from select_project import select_pj
+from .select_project import select_pj
 

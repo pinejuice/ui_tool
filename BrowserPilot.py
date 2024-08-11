@@ -11,6 +11,7 @@ sys.dont_write_bytecode = True
 
 
 # 自作モジュール
+from tkinter_common import *
 
 
 # システム設定
@@ -73,7 +74,7 @@ class TkinterOBJ():
             font=font_bold
         )
         pj_name_label_head.pack(side='left')
-        pj_name_label_body = ttk.Label(
+        self.pj_name_label_body = ttk.Label(
             self.header_frame1, 
             text=f'{self.project_info["name"]}', 
             width=25, 
@@ -81,7 +82,7 @@ class TkinterOBJ():
             relief='solid', 
             font=font_bold
         )
-        pj_name_label_body.pack(side='left', after=pj_name_label_head, padx=[0, 10])
+        self.pj_name_label_body.pack(side='left', after=pj_name_label_head, padx=[0, 10])
         # 「ファイル名」ラベル
         file_name_label_head = ttk.Label(
             self.header_frame1, 
@@ -93,7 +94,7 @@ class TkinterOBJ():
             font=font_bold
         )
         file_name_label_head.pack(side='left')
-        file_name_label_body = ttk.Label(
+        self.file_name_label_body = ttk.Label(
             self.header_frame1, 
             text=f'{self.project_info["last_file"]}', 
             width=40, 
@@ -101,10 +102,15 @@ class TkinterOBJ():
             relief='solid', 
             font=font_bold
         )
-        file_name_label_body.pack(side='left', after=file_name_label_head, padx=[0, 10])
+        self.file_name_label_body.pack(side='left', after=file_name_label_head, padx=[0, 10])
 
         # 「PJを選択」ボタン
-        select_pj_btn = ttk.Button(self.header_frame1, text='PJを選択')
+        select_pj_btn = ttk.Button(
+            self.header_frame1, 
+            text='PJを選択', 
+        )
+        select_pj_btn.bind('<Button-1>', lambda x: select_pj(self.project_info))
+        select_pj_btn.bind('<Button-1>', lambda x: self.update_header(), '+')
         select_pj_btn.pack(side='right')
         # 「ファイルを選択」ボタン
         select_file_btn = ttk.Button(self.header_frame1, text='ファイルを選択')
@@ -138,6 +144,12 @@ class TkinterOBJ():
         # メインフレームのWidgets
         label1 = Label(self.main_frame, text="aaaaaaaa")
         label1.pack()
+
+    def update_config(self):
+        pass
+
+    def update_header(self):
+        self.pj_name_label_body['text'] = self.project_info['name']
 
     def main(self):
         self.create_frame()
