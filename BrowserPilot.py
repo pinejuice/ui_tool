@@ -17,6 +17,7 @@ from tkinter_common import *
 # システム設定
 APP_NAME = 'BrowserPilot'
 BROWSER_LIST = ['Chrome', 'Firefox']
+CONFIG_FILE_PATH = 'current_pj.ini'
 
 
 class TkinterOBJ():
@@ -36,7 +37,7 @@ class TkinterOBJ():
 
     def load_current_project_info(self):
         conf = configparser.ConfigParser()
-        conf.read('current_pj.ini', encoding='utf-8')
+        conf.read(CONFIG_FILE_PATH, encoding='utf-8')
         # Defaultの読み込み
         self.project_info = {
             'path': conf.get('Default', 'PROJECT_PATH'),
@@ -146,10 +147,19 @@ class TkinterOBJ():
         label1.pack()
 
     def update_config(self):
-        pass
+        conf = configparser.ConfigParser()
+        conf['Default'] = {
+            'PROJECT_PATH': self.project_info['path'],
+            'PROJECT_NAME': self.project_info['name'],
+            'LAST_FILE': self.project_info['last_file'],
+            'LAST_BROWSER': self.project_info['browser'],
+        }
+        with open(CONFIG_FILE_PATH, 'w', encoding='utf-8') as f:
+            conf.write(f)
 
     def update_header(self):
         self.pj_name_label_body['text'] = self.project_info['name']
+        self.update_config()
 
     def main(self):
         self.create_frame()
