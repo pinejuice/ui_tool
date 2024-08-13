@@ -61,9 +61,12 @@ class TkinterOBJ():
         self.main_frame.pack(fill=BOTH, padx=[10, 10], pady=[0, 10])
 
     def setup_header(self):
-        # ヘッダー1のWidgets
         # フォントの設定
-        font_bold = font.Font(size=10, weight='bold')
+        Label_font_bold = font.Font(size=10, weight='bold')
+        style = ttk.Style()
+        style.configure('header.TButton', font=('', 10))
+
+        # ヘッダー1のWidgets
         # 「PJ名」ラベル
         pj_name_label_head = ttk.Label(
             self.header_frame1, 
@@ -72,7 +75,7 @@ class TkinterOBJ():
             foreground='#ffffff', 
             padding=(5, 10), 
             relief='solid', 
-            font=font_bold
+            font=Label_font_bold
         )
         pj_name_label_head.pack(side='left')
         self.pj_name_label_body = ttk.Label(
@@ -81,9 +84,10 @@ class TkinterOBJ():
             width=25, 
             padding=(5, 10), 
             relief='solid', 
-            font=font_bold
+            font=Label_font_bold
         )
         self.pj_name_label_body.pack(side='left', after=pj_name_label_head, padx=[0, 10])
+
         # 「ファイル名」ラベル
         file_name_label_head = ttk.Label(
             self.header_frame1, 
@@ -92,7 +96,7 @@ class TkinterOBJ():
             foreground='#ffffff', 
             padding=(5, 10), 
             relief='solid', 
-            font=font_bold
+            font=Label_font_bold
         )
         file_name_label_head.pack(side='left')
         self.file_name_label_body = ttk.Label(
@@ -101,7 +105,7 @@ class TkinterOBJ():
             width=40, 
             padding=(5, 10), 
             relief='solid', 
-            font=font_bold
+            font=Label_font_bold
         )
         self.file_name_label_body.pack(side='left', after=file_name_label_head, padx=[0, 10])
 
@@ -109,19 +113,29 @@ class TkinterOBJ():
         select_pj_btn = ttk.Button(
             self.header_frame1, 
             text='PJを選択', 
+            padding=[5, 10, 5, 10],
+            style='header.TButton'
         )
         select_pj_btn.bind('<Button-1>', lambda x: select_pj(self.project_info))
         select_pj_btn.bind('<Button-1>', lambda x: self.update_header(), '+')
-        select_pj_btn.pack(side='right')
+        select_pj_btn.pack(side='right', padx=[10, 0])
         # 「ファイルを選択」ボタン
-        select_file_btn = ttk.Button(self.header_frame1, text='ファイルを選択')
-        select_file_btn.pack(side='right')
+        select_file_btn = ttk.Button(
+            self.header_frame1, 
+            text='ファイルを選択', 
+            padding=[5, 10, 5, 10],
+            style='header.TButton'
+        )
+        select_file_btn.bind('<Button-1>', lambda x: select_file(self.project_info))
+        select_file_btn.bind('<Button-1>', lambda x: self.update_header(), '+')
+        select_file_btn.pack(side='right', padx=[10, 0])
         # 「新規作成」ボタン
         new_file_btn = ttk.Button(
             self.header_frame1, 
             text='新規作成', 
-            state=font_bold, 
-            padding=[5, 10, 5, 10]
+            state=Label_font_bold, 
+            padding=[5, 10, 5, 10],
+            style='header.TButton'
         )
         new_file_btn.pack(side='right')
         
@@ -130,14 +144,15 @@ class TkinterOBJ():
         run_btn = ttk.Button(
             self.header_frame2, 
             text='実行', 
-            padding=[5, 5, 5, 5]
+            padding=[5, 5, 5, 5],
+            style='header.TButton'
         )
         run_btn.pack(side='right', padx=[10, 0])
         # ブラウザのドライバーの選択
         browser_select = ttk.Combobox(
             self.header_frame2, 
             values=BROWSER_LIST,
-            width=20
+            width=25
         )
         browser_select.pack(side='right')
 
@@ -159,6 +174,7 @@ class TkinterOBJ():
 
     def update_header(self):
         self.pj_name_label_body['text'] = self.project_info['name']
+        self.file_name_label_body['text'] = self.project_info['last_file']
         self.update_config()
 
     def main(self):
