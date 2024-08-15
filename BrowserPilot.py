@@ -169,7 +169,7 @@ class TkinterOBJ():
         # 列の見出し設定
         self.tree.heading('#0',text='')
         self.tree.heading('number', text='No.',anchor='center')
-        self.tree.heading('command', text='コマンド', anchor='w')
+        self.tree.heading('command', text='コマンド', anchor='center')
         self.tree.heading('args',text='引数', anchor='center')
         # レコードの追加
         self.tree.insert(parent='', index='end', iid=0 ,values=(1, 'KAWASAKI',80))
