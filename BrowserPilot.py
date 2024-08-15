@@ -158,8 +158,26 @@ class TkinterOBJ():
 
     def setup_main_frame(self):
         # メインフレームのWidgets
-        label1 = Label(self.main_frame, text="aaaaaaaa")
-        label1.pack()
+        # 表
+        column_list = ['number', 'command', 'args']
+        self.tree = ttk.Treeview(self.main_frame, columns=column_list)
+        # 列の設定
+        self.tree.column('#0', width=0, stretch=False)
+        self.tree.column('number', anchor='center', width=80)
+        self.tree.column('command', anchor='w', width=100)
+        self.tree.column('args', anchor='center', width=80)
+        # 列の見出し設定
+        self.tree.heading('#0',text='')
+        self.tree.heading('number', text='No.',anchor='center')
+        self.tree.heading('command', text='コマンド', anchor='w')
+        self.tree.heading('args',text='引数', anchor='center')
+        # レコードの追加
+        self.tree.insert(parent='', index='end', iid=0 ,values=(1, 'KAWASAKI',80))
+        self.tree.insert(parent='', index='end', iid=1 ,values=(2, 'SHIMIZU', 90))
+        self.tree.insert(parent='', index='end', iid=2, values=(3, 'TANAKA', 45))
+        self.tree.insert(parent='', index='end', iid=3, values=(4, 'OKABE', 60))
+        self.tree.insert(parent='', index='end', iid=4, values=(5, 'MIYAZAKI', 99))
+        self.tree.pack()
 
     def update_config(self):
         conf = configparser.ConfigParser()
