@@ -179,6 +179,9 @@ class TkinterOBJ():
         self.tree.insert(parent='', index='end', iid=4, values=(5, 'MIYAZAKI', 99))
         self.tree.pack()
 
+    def insert_row(self, parent, index, iid, values):
+        pass
+
     def update_config(self):
         conf = configparser.ConfigParser()
         conf['Default'] = {
