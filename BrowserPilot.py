@@ -172,15 +172,21 @@ class TkinterOBJ():
         self.tree.heading('command', text='コマンド', anchor='center')
         self.tree.heading('args',text='引数', anchor='center')
         # レコードの追加
-        self.tree.insert(parent='', index='end', iid=0 ,values=(1, 'KAWASAKI',80))
-        self.tree.insert(parent='', index='end', iid=1 ,values=(2, 'SHIMIZU', 90))
-        self.tree.insert(parent='', index='end', iid=2, values=(3, 'TANAKA', 45))
-        self.tree.insert(parent='', index='end', iid=3, values=(4, 'OKABE', 60))
-        self.tree.insert(parent='', index='end', iid=4, values=(5, 'MIYAZAKI', 99))
+        self.insert_row(parent='', index='end', iid=0 ,values=(1, 'KAWASAKI',80))
+        self.insert_row(parent='', index='end', iid=1 ,values=(2, 'SHIMIZU', 90))
+        self.insert_row(parent='', index='end', iid=2, values=(3, 'TANAKA', 45))
+        self.insert_row(parent='', index='end', iid=3, values=(4, 'OKABE', 60))
+        self.insert_row(parent='', index='end', iid=4, values=(5, 'MIYAZAKI', 99))
         self.tree.pack()
 
     def insert_row(self, parent, index, iid, values):
-        pass
+        self.tree.insert(
+            parent=parent, 
+            index=index, 
+            iid=iid,
+            values=values
+        )
+
 
     def update_config(self):
         conf = configparser.ConfigParser()
