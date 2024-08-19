@@ -19,6 +19,8 @@ APP_NAME = 'BrowserPilot'
 BROWSER_LIST = ['Chrome', 'Firefox']
 CONFIG_FILE_PATH = 'current_pj.ini'
 
+# メインフレームの表のヘッダーの情報
+HEADER_LIST = ['No.', 'コマンド', 'パラメータ1', 'パラメータ2', '備考']
 
 class TkinterOBJ():
     def __init__(self):
@@ -158,35 +160,22 @@ class TkinterOBJ():
 
     def setup_main_frame(self):
         # メインフレームのWidgets
-        # 表
+        # 表の設定値
         column_list = ['number', 'command', 'args']
-        self.tree = ttk.Treeview(self.main_frame, columns=column_list)
-        # 列の設定
-        self.tree.column('#0', width=0, stretch=False)
-        self.tree.column('number', anchor='center', width=80)
-        self.tree.column('command', anchor='w', width=100)
-        self.tree.column('args', anchor='center', width=80)
-        # 列の見出し設定
-        self.tree.heading('#0',text='')
-        self.tree.heading('number', text='No.',anchor='center')
-        self.tree.heading('command', text='コマンド', anchor='center')
-        self.tree.heading('args',text='引数', anchor='center')
-        # レコードの追加
-        self.insert_row(parent='', index='end', iid=0 ,values=(1, 'KAWASAKI',80))
-        self.insert_row(parent='', index='end', iid=1 ,values=(2, 'SHIMIZU', 90))
-        self.insert_row(parent='', index='end', iid=2, values=(3, 'TANAKA', 45))
-        self.insert_row(parent='', index='end', iid=3, values=(4, 'OKABE', 60))
-        self.insert_row(parent='', index='end', iid=4, values=(5, 'MIYAZAKI', 99))
-        self.tree.pack()
+        # 表全体を管理する2次元配列
+        self.table = []
+        # 表のヘッダーを作成
+        header_row = []
+        for i in range(len(HEADER_LIST)):
+            col = ttk.Label(self.main_frame, width=10, text=HEADER_LIST[i])
+            col.grid(row=0, column=i)
+            header_row.append(col)
+        self.table.append(header_row)
 
-    def insert_row(self, parent, index, iid, values):
-        self.tree.insert(
-            parent=parent, 
-            index=index, 
-            iid=iid,
-            values=values
-        )
-
+    def insert_row(self, num=None, command='', param1=None, param2=None, memo=None):
+        row = []
+        for i in range(len(HEADER_LIST)):
+            pass
 
     def update_config(self):
         conf = configparser.ConfigParser()
