@@ -20,7 +20,7 @@ BROWSER_LIST = ['Chrome', 'Firefox']
 CONFIG_FILE_PATH = 'current_pj.ini'
 
 # メインフレームの表のヘッダーの情報
-HEADER_LIST = ['No.', 'コマンド', 'パラメータ1', 'パラメータ2', '備考']
+HEADER_LIST = [('No.', 10), ('コマンド', 30), ('パラメータ1', 30), ('パラメータ2', 30), ('備考', 50)]
 
 class TkinterOBJ():
     def __init__(self):
@@ -167,7 +167,7 @@ class TkinterOBJ():
         # 表のヘッダーを作成
         header_row = []
         for i in range(len(HEADER_LIST)):
-            col = ttk.Label(self.main_frame, width=10, text=HEADER_LIST[i])
+            col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=HEADER_LIST[i][0])
             col.grid(row=0, column=i)
             header_row.append(col)
         self.table.append(header_row)
