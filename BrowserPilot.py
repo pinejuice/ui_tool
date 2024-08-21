@@ -160,8 +160,6 @@ class TkinterOBJ():
 
     def setup_main_frame(self):
         # メインフレームのWidgets
-        # 表の設定値
-        column_list = ['number', 'command', 'args']
         # 表全体を管理する2次元配列
         self.table = []
         # 表のヘッダーを作成
