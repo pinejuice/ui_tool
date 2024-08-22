@@ -160,20 +160,25 @@ class TkinterOBJ():
 
     def setup_main_frame(self):
         # メインフレームのWidgets
+        self.row_num = 0
         # 表全体を管理する2次元配列
         self.table = []
         # 表のヘッダーを作成
         header_row = []
         for i in range(len(HEADER_LIST)):
             col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=HEADER_LIST[i][0])
-            col.grid(row=0, column=i)
+            col.grid(row=self.row_num, column=i)
             header_row.append(col)
         self.table.append(header_row)
 
-    def insert_row(self, num=None, command='', param1=None, param2=None, memo=None):
+    def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None):
         row = []
         for i in range(len(HEADER_LIST)):
-            pass
+            col = ttk.Entry(self.main_frame, width=HEADER_LIST[i][1])
+            col.grid(row=row_num, column=i)
+            row.append(col)
+        self.table.append(row)
+
 
     def update_config(self):
         conf = configparser.ConfigParser()
