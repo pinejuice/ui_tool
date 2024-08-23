@@ -170,11 +170,15 @@ class TkinterOBJ():
             col.grid(row=self.row_num, column=i)
             header_row.append(col)
         self.table.append(header_row)
+        # 表のボディを作成
 
     def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None):
         row = []
         for i in range(len(HEADER_LIST)):
-            col = ttk.Entry(self.main_frame, width=HEADER_LIST[i][1])
+            if i == 0:
+                col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=self.row_num+1)
+            else:
+                col = ttk.Entry(self.main_frame, width=HEADER_LIST[i][1])
             col.grid(row=row_num, column=i)
             row.append(col)
         self.table.append(row)
