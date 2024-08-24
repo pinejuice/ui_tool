@@ -142,17 +142,25 @@ class TkinterOBJ():
         new_file_btn.pack(side='right')
         
         # ヘッダー2のWidgets
+        # 保存ボタン
+        save_btn = ttk.Button(
+            self.header_frame2,
+            text='保存',
+            padding=[5, 5, 5, 5],
+            style='header.TButton',
+        )
+        save_btn.pack(side='left', padx=[0, 10])
         # 実行ボタン
         run_btn = ttk.Button(
-            self.header_frame2, 
-            text='実行', 
+            self.header_frame2,
+            text='実行',
             padding=[5, 5, 5, 5],
-            style='header.TButton'
+            style='header.TButton',
         )
         run_btn.pack(side='right', padx=[10, 0])
         # ブラウザのドライバーの選択
         browser_select = ttk.Combobox(
-            self.header_frame2, 
+            self.header_frame2,
             values=BROWSER_LIST,
             width=25
         )
@@ -166,28 +174,32 @@ class TkinterOBJ():
         # 表のヘッダーを作成
         header_row = []
         for i in range(len(HEADER_LIST)):
-            col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=HEADER_LIST[i][0])
+            col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=HEADER_LIST[i][0], anchor='center')
             col.grid(row=self.row_num, column=i)
             header_row.append(col)
         self.table.append(header_row)
         # 表のボディを作成
-        now_row = self.row_num
-        for i in range(now_row + 1, now_row + 11, 1):
-            self.insert_row(i)
-            self.row_num = i
+        if self.project_info['last_file'] == '':
+            now_row = self.row_num
+            for i in range(now_row + 1, now_row + 11, 1):
+                self.insert_row(i)
+                self.row_num = i
+        else:
+            pass
 
-
-    def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None):
+    def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None, text=None):
         row = []
         for i in range(len(HEADER_LIST)):
             if i == 0:
-                col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=self.row_num+1)
+                col = ttk.Label(self.main_frame, width=HEADER_LIST[i][1], text=self.row_num+1, anchor='center')
             else:
                 col = ttk.Entry(self.main_frame, width=HEADER_LIST[i][1])
             col.grid(row=row_num, column=i)
             row.append(col)
         self.table.append(row)
 
+    def load_json(self):
+        pass
 
     def update_config(self):
         conf = configparser.ConfigParser()
