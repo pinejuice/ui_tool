@@ -171,6 +171,11 @@ class TkinterOBJ():
             header_row.append(col)
         self.table.append(header_row)
         # 表のボディを作成
+        now_row = self.row_num
+        for i in range(now_row + 1, now_row + 11, 1):
+            self.insert_row(i)
+            self.row_num = i
+
 
     def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None):
         row = []
