@@ -185,6 +185,8 @@ class TkinterOBJ():
                 self.insert_row(i)
                 self.row_num = i
         else:
+            # Jsonファイルを読み込む
+            # 読み込んだJsonファイルからコマンドを表に記載する
             pass
 
     def insert_row(self, row_num, num=None, command='', param1=None, param2=None, memo=None, text=None):
