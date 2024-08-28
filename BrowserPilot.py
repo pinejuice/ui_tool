@@ -186,6 +186,7 @@ class TkinterOBJ():
                 self.row_num = i
         else:
             # Jsonファイルを読み込む
+
             # 読み込んだJsonファイルからコマンドを表に記載する
             pass
 
