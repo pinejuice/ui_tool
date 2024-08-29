@@ -1,4 +1,5 @@
 import os
+import json
 from tkinter import filedialog
 
 
@@ -22,3 +23,6 @@ def select_file(pj_info):
     pj_info['name'] = os.path.basename(os.path.dirname(file_path))
     pj_info['last_file'] = os.path.basename(file_path)
 
+def load_json(target_json_file):
+    with open(target_json_file, 'r', encoding='utf-8') as f:
+        d = json.load(f)
