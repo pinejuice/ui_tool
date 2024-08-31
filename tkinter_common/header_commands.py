@@ -25,8 +25,9 @@ def select_file(pj_info):
 
     json_file_path = os.path.join(pj_info['path'], 'source', pj_info['last_file'])
     print(json_file_path)
+    load_json(json_file_path)
 
 def load_json(target_json_file):
     with open(target_json_file, 'r', encoding='utf-8') as f:
         d = json.load(f)
-        print(d)
+        command_list = d['commands']
