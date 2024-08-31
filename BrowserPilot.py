@@ -186,7 +186,8 @@ class TkinterOBJ():
                 self.row_num = i
         else:
             # Jsonファイルを読み込む
-
+            json_file_path = os.path.join(self.project_info['path'], 'source', self.project_info['last_file'])
+            load_json()
             # 読み込んだJsonファイルからコマンドを表に記載する
             pass
 
@@ -200,9 +201,6 @@ class TkinterOBJ():
             col.grid(row=row_num, column=i)
             row.append(col)
         self.table.append(row)
-
-    def load_json(self):
-        pass
 
     def update_config(self):
         conf = configparser.ConfigParser()
